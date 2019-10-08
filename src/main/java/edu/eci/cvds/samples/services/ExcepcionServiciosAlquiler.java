@@ -16,5 +16,9 @@ public class ExcepcionServiciosAlquiler extends Exception {
     public ExcepcionServiciosAlquiler (String message, PersistenceException e){
         super(message);
     }
+
+    public ExcepcionServiciosAlquiler(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
