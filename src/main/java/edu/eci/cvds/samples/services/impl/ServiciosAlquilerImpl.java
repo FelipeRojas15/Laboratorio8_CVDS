@@ -13,6 +13,7 @@ import edu.eci.cvds.samples.entities.TipoItem;
 import edu.eci.cvds.exceptions.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,12 +85,24 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+//       LocalDate actualDate = 
+//       int diasRetraso=fechaDevolucion.getTime() - LocalDateTime.now();
+//       try {
+//           return (itemDAO.load(iditem).getTarifaxDia()+(itemDAO.load(iditem).getTarifaxDia()*0.1))*;
+//       }
+//       catch (PersistenceException ex){
+//           throw new ExcepcionServiciosAlquiler("Error al consultar el alquiler del item "+iditem, ex);
+//       }
    }
 
    @Override
    public TipoItem consultarTipoItem(int id) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       try{
+           return itemDAO.load(id).getTipo();           
+       }
+       catch (PersistenceException ex){
+           throw new ExcepcionServiciosAlquiler("Error al consultar el tipo item"+id,ex);
+       }
    }
 
    @Override
@@ -99,30 +112,60 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       try{
+           clienteDAO.saveItemAgregadoACliente(date,docu,item,numdias);
+       }
+       catch (PersistenceException ex) {
+           throw new ExcepcionServiciosAlquiler("Error al registrar el alquiler del cliente", ex);
+       }
    }
 
    @Override
    public void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       try{
+           clienteDAO.save(c);
+       }
+       catch (PersistenceException ex){
+           throw new ExcepcionServiciosAlquiler("Error al registrar al cliente", ex);
+       }
    }
 
    @Override
    public long consultarCostoAlquiler(int iditem, int numdias) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       try {
+           return itemDAO.load(iditem).getTarifaxDia()*numdias;
+       }
+       catch (PersistenceException ex){
+           throw new ExcepcionServiciosAlquiler("Error al consultar el alquiler del item "+iditem, ex);
+       }
    }
 
    @Override
    public void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       try {
+           itemDAO.load(id).setTarifaxDia(tarifa);
+       }
+       catch (PersistenceException ex){
+           throw new ExcepcionServiciosAlquiler("Error al actualizar la tarifa del item "+id, ex);
+       }
    }
    @Override
    public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try{
+           itemDAO.save(i);
+       }
+       catch (PersistenceException ex){
+           throw new ExcepcionServiciosAlquiler("Error al registrar el item", ex);
+       }
    }
 
    @Override
    public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try{
+           clienteDAO.load(docu).setVetado(estado);
+       }
+       catch (PersistenceException ex){
+           throw new ExcepcionServiciosAlquiler("Error al vetar al cliente con numero de documento "+docu, ex);
+       }
    }
 }

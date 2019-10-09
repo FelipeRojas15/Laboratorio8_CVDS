@@ -11,13 +11,29 @@ import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.TipoItem;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 public class MyBATISClienteDAO implements ClienteDAO {
 
     @Inject
     private ClienteMapper clienteMapper;
+    @Override
+    public void saveItemAgregadoACliente(Date date, long docu, Item item, int numdias) throws PersistenceException {
+        Calendar cal = Calendar.getInstance();                                 
+        cal.setTime(date);
+        cal.add(Calendar.DATE, numdias);        
+        try{
+            clienteMapper.agregarItemRentadoACliente((int)docu, item.getId(), date, cal.getTime());
+            
+        }
+        
+        catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al registrar el prestamo al cliente ", e);
+        }
+    }
 
     @Override
     public void save(Cliente cl) throws PersistenceException {
@@ -27,6 +43,8 @@ public class MyBATISClienteDAO implements ClienteDAO {
             throw new PersistenceException("Error al registrar el cliente ", e);
         }
     }
+    
+    
 
     @Override
     public Cliente load(long id) throws PersistenceException {
@@ -47,6 +65,7 @@ public class MyBATISClienteDAO implements ClienteDAO {
             throw new PersistenceException("Error al consultar el cliente ", e);
         }
     }
+
     
 
 }

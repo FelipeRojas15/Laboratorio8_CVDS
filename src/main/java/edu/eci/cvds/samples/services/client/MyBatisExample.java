@@ -74,7 +74,7 @@ public class MyBatisExample {
         ItemMapper cn=sqlss.getMapper(ItemMapper.class);
         //System.out.println(cm.consultarClientes());
         //System.out.println(cm.consultarCliente(4));
-        System.out.println("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+        
         cm.agregarItemRentadoACliente(98, 6, convertDate("1999-12-29"), convertDate("2019-03-12"));
         TipoItem item1= new TipoItem(3,"Tema enredado ");
         Item item = new Item(item1, 65, "Calabaza", "Es naranja ", convertDate("1999-12-25"), 345, "formato de renta", "Travesti");
