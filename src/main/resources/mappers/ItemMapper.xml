@@ -48,5 +48,11 @@
    
     </resultMap>
 
+    <select parameterType = "map" id="consultarMultaAlquiler" resultMap="ItemResult">
+        SELECT VI_ITEMS.tarifaxdia*(DATEDIFF(#{fecha},fechafinrenta))  
+        FROM VI_ITEMRENTADO,VI_ITEMS 
+        WHERE VI_ITEMS.id = VI_ITEMRENTADO.ITEMS_id and VI_ITEMS.id = #{id} and DATEDIFF(#{fecha},fechafinrenta)>0;
     
+       
+    </select>
 </mapper>

@@ -21,6 +21,7 @@ public interface ItemMapper {
     public void insertarItem(@Param("item")Item it);
 
     public List<Item> consultarItemsDisponibles();
-
+    
+    public int consultarMultaAlquiler(@Param("id")int id,@Param("fecha") Date fecha );
         
 }

@@ -85,14 +85,14 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-//       LocalDate actualDate = 
-//       int diasRetraso=fechaDevolucion.getTime() - LocalDateTime.now();
-//       try {
-//           return (itemDAO.load(iditem).getTarifaxDia()+(itemDAO.load(iditem).getTarifaxDia()*0.1))*;
-//       }
-//       catch (PersistenceException ex){
-//           throw new ExcepcionServiciosAlquiler("Error al consultar el alquiler del item "+iditem, ex);
-//       }
+      
+      try {
+          return itemDAO.multaAlquiler(iditem,fechaDevolucion);
+      }
+      catch (PersistenceException ex){
+          throw new ExcepcionServiciosAlquiler("Error al consultar el alquiler del item "+iditem, ex);
+       }
+       
    }
 
    @Override

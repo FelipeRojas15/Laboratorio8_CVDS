@@ -8,6 +8,7 @@ import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.cvds.samples.entities.TipoItem;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -44,6 +45,14 @@ public class MyBATISItemDAO implements ItemDAO {
         catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al los items disponibles", e);
         }
+    }
+    
+    @Override
+    public long multaAlquiler(int iditem, Date fechaDevolucion) throws PersistenceException{
+        
+       return itemMapper.consultarMultaAlquiler(iditem,fechaDevolucion);
+    
+    
     }
 
 }
