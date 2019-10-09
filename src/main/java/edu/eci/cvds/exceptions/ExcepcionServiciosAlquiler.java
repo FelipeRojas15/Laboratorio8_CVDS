@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.cvds.samples.services;
+package edu.eci.cvds.exceptions;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 
@@ -13,7 +13,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
  */
 public class ExcepcionServiciosAlquiler extends Exception {
     
-    public ExcepcionServiciosAlquiler (String message, PersistenceException e){
+    public ExcepcionServiciosAlquiler (String message, edu.eci.cvds.exceptions.PersistenceException e){
         super(message);
     }
 

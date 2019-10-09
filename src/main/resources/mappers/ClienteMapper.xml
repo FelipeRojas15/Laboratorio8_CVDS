@@ -69,10 +69,10 @@
 			#{idcli}=c.documento
 
 	</select>
+    
     <insert parameterType="map" id = "agregarItemRentadoACliente" >    	
         insert into VI_ITEMRENTADO(CLIENTES_documento, ITEMS_id, fechainiciorenta, fechafinrenta) values(#{id},#{idit},#{fechaI},#{fechaF})
     </insert>
-    
      
     
     <resultMap type='Cliente' id='ClienteResult'>

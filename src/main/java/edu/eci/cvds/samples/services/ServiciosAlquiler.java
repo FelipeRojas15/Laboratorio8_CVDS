@@ -1,5 +1,6 @@
 package edu.eci.cvds.samples.services;
 
+import edu.eci.cvds.exceptions.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.ItemRentado;

@@ -29,6 +29,13 @@
         <insert parameterType="map" id="insertarItem">
     	insert into VI_ITEMS(id,nombre,descripcion,fechaLanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id) values(#{item.id},#{item.nombre},#{item.descripcion},#{item.fechaLanzamiento},#{item.tarifaxDia},#{item.formatoRenta},#{item.genero},#{item.tipo.id})
     </insert>    
+    
+    <select parameterType="map" id="consultarItemsDisponibles" resultMap="ItemResult">
+                    SELECT DISTINCT * 
+                    FROM bdprueba.VI_ITEMS LEFT JOIN bdprueba.VI_ITEMRENTADO 
+                    ON bdprueba.VI_ITEMS.id = bdprueba.VI_ITEMRENTADO.ITEMS_id
+                    WHERE bdprueba.VI_ITEMRENTADO.CLIENTES_documento IS NULL
+    </select>
     <resultMap type='Item' id='ItemResult'>
         <id property='id' column='id'/>
         <result property='nombre' column='nombre'/>
