@@ -38,7 +38,7 @@ public class MyBATISItemDAO implements ItemDAO {
     }
 
     @Override
-    public List<Item> itemsDisponibles() throws edu.eci.cvds.exceptions.PersistenceException {
+    public List<Item> itemsDisponibles() throws edu.eci.cvds.sampleprj.dao.PersistenceException {
         try {
             return itemMapper.consultarItemsDisponibles();
         }

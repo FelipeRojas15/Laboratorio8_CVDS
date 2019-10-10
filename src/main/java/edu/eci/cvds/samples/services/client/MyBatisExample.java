@@ -1,4 +1,4 @@
-    /*
+/*
  * Copyright (C) 2015 hcadavid
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,8 +16,7 @@
  */
 package edu.eci.cvds.samples.services.client;
 
-
-
+import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.cvds.samples.entities.Item;
@@ -30,6 +29,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -41,7 +42,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
  */
 public class MyBatisExample {
 
-    // ALLAAAAAAAAAN AQUI HAY QUE CREAR LO DE TIPO FABRICAR PARA OBTENER LOS METODOS DE LA CLASE SERVICIOSALQUILERFACTORY ESTE getServiciosAlquiler Y getServiciosAlquilerTesting POR QUE ESOS TIENEN EL CONFIG Y NOS AYUDA HACER EL PUNTO 8
     //private static ServiciosAlquiler fabrica = new ServiciosAlquiler();
     /**
      * Método que construye una fábrica de sesiones de MyBatis a partir del
@@ -49,7 +49,8 @@ public class MyBatisExample {
      *
      * @return instancia de SQLSessionFactory
      */
-    
+    public static ServiciosAlquiler testDeServicio = ServiciosAlquilerFactory.getInstance().getServiciosAlquiler();
+
     public static SqlSessionFactory getSqlSessionFactory() {
         SqlSessionFactory sqlSessionFactory = null;
         if (sqlSessionFactory == null) {
@@ -61,50 +62,53 @@ public class MyBatisExample {
                 throw new RuntimeException(e.getCause());
             }
         }
-        
+
         return sqlSessionFactory;
     }
 
     /**
      * Programa principal de ejempo de uso de MyBATIS
+     *
      * @param args
-     * @throws SQLException 
+     * @throws SQLException
      */
     public static void main(String args[]) throws SQLException {
-        
-        SqlSessionFactory sessionfact = getSqlSessionFactory();
+        pruebasClientes();
+        pruebasItems();
 
-        SqlSession sqlss = sessionfact.openSession();
-        ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
-        ItemMapper cn=sqlss.getMapper(ItemMapper.class);
-        //System.out.println(cm.consultarClientes());
-        //System.out.println(cm.consultarCliente(4));
-        
-        cm.agregarItemRentadoACliente(98, 6, convertDate("1999-12-29"), convertDate("2019-03-12"));
-        TipoItem item1= new TipoItem(3,"Tema enredado ");
-        Item item = new Item(item1, 65, "Calabaza", "Es naranja ", convertDate("1999-12-25"), 345, "formato de renta", "Travesti");
-        Item aItem;
-        aItem = new Item(item1,9999,"Lab de acso","muy largo",convertDate("2177-08-09"), 60,"viernes","arroz" );
-        cn.insertarItem(aItem);
-        
-        
-        
-        
-        sqlss.commit();
-        
-        
-        sqlss.close();
+    }
 
+    public static void pruebasClientes() {
         
+        try {            
+            //Primer prueba consultando al cliente 90
+            System.out.println(">>>>>>>>PRUEBA DE CONSULTAR CLIENTE MEDIANTE CAPA LOGICA<<<<<<<<\n");
+            System.out.println(testDeServicio.consultarCliente((long) 90).toString()+"\n\n");
+            //Segunda prueba consultando los items de un cliente
+            System.out.println(">>>>>>>>PRUEBA DE CONSULTAR LOS ITEMS DE UN CLIENTE<<<<<<<<\n");
+            System.out.println(testDeServicio.consultarItemsCliente((long) 69).toString()+"\n\n");
+            //Tercera prueba consultando todos los clientes
+        } catch (ExcepcionServiciosAlquiler ex) {
+            Logger.getLogger(MyBatisExample.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void pruebasItems(){
+        try{
+            System.out.println(">>>>>>>>PRUEBA DE CONSULTAR ITEM MEDIANTE CAPA LOGICA<<<<<<<<\n");
+            System.out.println(testDeServicio.consultarItem(666)+"\n\n");
+        } catch (ExcepcionServiciosAlquiler ex){
+            
+        }
         
     }
-    public static Date convertDate(String fecha){
+
+    public static Date convertDate(String fecha) {
         try {
             return new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
         } catch (ParseException e) {
             return null;
-        }        
+        }
     }
-
 
 }

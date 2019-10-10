@@ -30,7 +30,7 @@ public interface ClienteMapper {
             @Param("fechaI")Date fechainicio,
             @Param("fechaF")Date fechafin);
     
-    public void agregarCliente(Cliente cliente);
+    public void agregarCliente(@Param("objCliente")Cliente cliente);
     /**
      * Consultar todos los clientes
      * @return 
