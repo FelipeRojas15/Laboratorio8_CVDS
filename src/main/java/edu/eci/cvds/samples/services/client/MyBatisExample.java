@@ -22,6 +22,8 @@ import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.TipoItem;
+import edu.eci.cvds.samples.services.ServiciosAlquiler;
+import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
@@ -39,12 +41,15 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
  */
 public class MyBatisExample {
 
+    // ALLAAAAAAAAAN AQUI HAY QUE CREAR LO DE TIPO FABRICAR PARA OBTENER LOS METODOS DE LA CLASE SERVICIOSALQUILERFACTORY ESTE getServiciosAlquiler Y getServiciosAlquilerTesting POR QUE ESOS TIENEN EL CONFIG Y NOS AYUDA HACER EL PUNTO 8
+    //private static ServiciosAlquiler fabrica = new ServiciosAlquiler();
     /**
      * Método que construye una fábrica de sesiones de MyBatis a partir del
      * archivo de configuración ubicado en src/main/resources
      *
      * @return instancia de SQLSessionFactory
      */
+    
     public static SqlSessionFactory getSqlSessionFactory() {
         SqlSessionFactory sqlSessionFactory = null;
         if (sqlSessionFactory == null) {
