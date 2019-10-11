@@ -5,12 +5,29 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h2  id="instructions">Videorental EL BETAMAX - Registro de clientes</h2>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+    </h:head>
+    <h:body>
+        <h:form id="registro_clientes">
+            
+            <p:panelGrid columns = "2" id="mainPanel">
+                    <p:dataTable var="itrent" value="#{videoRental.getTodosLosClientes()}"
+					 paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" rows="10">
+                    </p:dataTable>
+                
+                    <p:column headerText="Id">
+                        <h:outputText value="#{itrent.id}" />
+                    </p:column>
+                    
+            </p:panelGrid>
+            
+        </h:form>
+                
+    </h:body>
 </html>
