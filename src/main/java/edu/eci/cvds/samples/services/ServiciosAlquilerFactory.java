@@ -22,7 +22,7 @@ public class ServiciosAlquilerFactory {
 
    private static Optional<Injector> optInjector;
 
-   private Injector myBatisInjector(String env, String pathResource) {
+   private static Injector myBatisInjector(String env, String pathResource) {
        return createInjector(new XMLMyBatisModule() {
            @Override
            protected void initialize() {
@@ -40,7 +40,7 @@ public class ServiciosAlquilerFactory {
        optInjector = Optional.empty();
    }
 
-   public ServiciosAlquiler getServiciosAlquiler(){
+   public static ServiciosAlquiler getServiciosAlquiler(){
        if (!optInjector.isPresent()) {
            optInjector = Optional.of(myBatisInjector("development","mybatis-config.xml"));
        }
@@ -49,8 +49,8 @@ public class ServiciosAlquilerFactory {
    }
 
 
-   public ServiciosAlquiler getServiciosAlquilerTesting(){
-       if (!optInjector.isPresent()) {
+   public static ServiciosAlquiler getServiciosAlquilerTesting() throws ExcepcionServiciosAlquiler{
+       if (!optInjector.isPresent()) {           
            optInjector = Optional.of(myBatisInjector("test","mybatis-config-h2.xml"));
        }
 

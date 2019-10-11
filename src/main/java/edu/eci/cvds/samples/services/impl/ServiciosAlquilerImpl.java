@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.mybatis.guice.transactional.Transactional;
 
 @Singleton
 public class ServiciosAlquilerImpl implements ServiciosAlquiler {
@@ -28,7 +29,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public int valorMultaRetrasoxDia(int itemId) {
-       return 0; //itemDAO.load(itemId).getTarifaxDia();
+       return 0; 
        
    }
 
@@ -38,6 +39,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
            return clienteDAO.load(docu);
        }
         catch (edu.eci.cvds.sampleprj.dao.PersistenceException ex) {
+            
             throw new ExcepcionServiciosAlquiler("Error al consultar los clientes", ex);
         }
 
@@ -54,7 +56,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    }
 
-   @Override
+   @Override   
    public List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler {
        try{
            return clienteDAO.load();
@@ -67,7 +69,10 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    @Override
    public Item consultarItem(int id) throws ExcepcionServiciosAlquiler {
        try {
+           
+                      
            return itemDAO.load(id);
+           
        } catch (PersistenceException ex) {
            throw new ExcepcionServiciosAlquiler("Error al consultar el item "+id,ex);
        }

@@ -19,6 +19,7 @@ package edu.eci.cvds.samples.services.client;
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.TipoItem;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
@@ -87,7 +88,12 @@ public class MyBatisExample {
             //Segunda prueba consultando los items de un cliente
             System.out.println(">>>>>>>>PRUEBA DE CONSULTAR LOS ITEMS DE UN CLIENTE<<<<<<<<\n");
             System.out.println(testDeServicio.consultarItemsCliente((long) 69).toString()+"\n\n");
-            //Tercera prueba consultando todos los clientes
+            //Tercera prueba agregando un nuevo cliente
+            Cliente cli  = new Cliente("Pedro el escamoso",14141414,"5436753","la olla","pirulin@mail.com",false, null);            
+            testDeServicio.registrarCliente(cli);
+            
+
+            
         } catch (ExcepcionServiciosAlquiler ex) {
             Logger.getLogger(MyBatisExample.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -97,10 +103,26 @@ public class MyBatisExample {
         try{
             System.out.println(">>>>>>>>PRUEBA DE CONSULTAR ITEM MEDIANTE CAPA LOGICA<<<<<<<<\n");
             System.out.println(testDeServicio.consultarItem(666)+"\n\n");
+            
+            /**
+            
+            System.out.println(">>>>>>>>PRUEBA DE AGREGAR ITEM<<<<<<<<\n");
+            testDeServicio.registrarItem(generarItem());
+            
+            System.out.println(testDeServicio.consultarItem(115)+"\n\n");
+            */
+            
+            
         } catch (ExcepcionServiciosAlquiler ex){
             
         }
         
+    }
+    public static Item generarItem(){        
+        TipoItem tipoDeItemAgregado = new TipoItem(15,"Tipo de Item volador");
+        Date fecha = convertDate("2012-02-22");
+        Item itemAgregado = new Item(tipoDeItemAgregado, 115, "Cloud Treasure", "Tesoro en las alturas vuela a velocidades impresionantes", fecha, 20000, "Renta Express", "Carreras");
+        return itemAgregado;
     }
 
     public static Date convertDate(String fecha) {
