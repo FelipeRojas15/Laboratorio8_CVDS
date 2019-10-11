@@ -14,6 +14,6 @@ public interface ClienteDAO {
    
    public List<Cliente> load() throws PersistenceException;
    
-   public void saveItemAgregadoACliente(Date date, long docu, Item item, int numdias) throws PersistenceException;
+   public void saveItemAgregadoACliente(long docu, Item item, java.sql.Date fechaini, java.sql.Date fechafin) throws PersistenceException;
 
 }

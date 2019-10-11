@@ -17,14 +17,15 @@
 	</select>
     <select parameterType="map" id="consultarItem" resultMap="ItemResult">
 			select
-			i.id as item_id,
-			i.nombre as item_nombre ,
-			i.descripcion as item_descripcion,
-			i.fechalanzamiento as item_fechalanzamiento,
-			i.genero as item_genero,
-                        ti.descripcion
+			i.id,
+			i.nombre as nombre ,
+			i.descripcion as descripcion,
+			i.fechalanzamiento as fechalanzamiento,
+			i.genero as genero,
+                        ti.id as tipo_id,
+                        ti.descripcion as tipo_descripcion
 			FROM VI_ITEMS as i,VI_TIPOITEM as ti 
-                        where TIPOITEM_id = ti.id and #{id} = i.id 
+                        where TIPOITEM_id = ti.id and #{iditem} = i.id 
 	</select>
         <insert parameterType="map" id="insertarItem">
     	insert into VI_ITEMS(id,nombre,descripcion,fechaLanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id) values(#{item.id},#{item.nombre},#{item.descripcion},#{item.fechaLanzamiento},#{item.tarifaxDia},#{item.formatoRenta},#{item.genero},#{item.tipo.id})

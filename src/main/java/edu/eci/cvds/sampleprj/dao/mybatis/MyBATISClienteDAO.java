@@ -20,12 +20,10 @@ public class MyBATISClienteDAO implements ClienteDAO {
     @Inject
     private ClienteMapper clienteMapper;
     @Override
-    public void saveItemAgregadoACliente(Date date, long docu, Item item, int numdias) throws PersistenceException {
-        Calendar cal = Calendar.getInstance();                                 
-        cal.setTime(date);
-        cal.add(Calendar.DATE, numdias);        
+    public void saveItemAgregadoACliente(long docu, Item item, Date fechaini,Date fechafin) throws PersistenceException {
+               
         try{
-            clienteMapper.agregarItemRentadoACliente((int)docu, item.getId(), date, cal.getTime());
+            clienteMapper.agregarItemRentadoACliente(docu, item.getId(), fechaini,fechafin);
             
         }
         
@@ -33,7 +31,6 @@ public class MyBATISClienteDAO implements ClienteDAO {
             throw new PersistenceException("Error al registrar el prestamo al cliente ", e);
         }
     }
-
     @Override
     public void save(Cliente cl) throws PersistenceException {
         try {

@@ -88,9 +88,9 @@ public class MyBatisExample {
             //Segunda prueba consultando los items de un cliente
             System.out.println(">>>>>>>>PRUEBA DE CONSULTAR LOS ITEMS DE UN CLIENTE<<<<<<<<\n");
             System.out.println(testDeServicio.consultarItemsCliente((long) 69).toString()+"\n\n");
-            //Tercera prueba agregando un nuevo cliente
-            Cliente cli  = new Cliente("Pedro el escamoso",14141414,"5436753","la olla","pirulin@mail.com",false, null);            
-            testDeServicio.registrarCliente(cli);
+            //Tercera prueba agregando un nuevo cliente CLIENTE YA AGREGADO
+            //Cliente cli  = new Cliente("Bill Clinton",98347,"5436753","la casa blanca","leguinskyBJ@mail.com",false, null);            
+            //testDeServicio.registrarCliente(cli);
             
 
             
@@ -102,6 +102,7 @@ public class MyBatisExample {
     public static void pruebasItems(){
         try{
             System.out.println(">>>>>>>>PRUEBA DE CONSULTAR ITEM MEDIANTE CAPA LOGICA<<<<<<<<\n");
+            System.out.println("ESTO FALLA Y SEGUIRA FALLANDO******************************************************************");
             System.out.println(testDeServicio.consultarItem(666)+"\n\n");
             
             /**

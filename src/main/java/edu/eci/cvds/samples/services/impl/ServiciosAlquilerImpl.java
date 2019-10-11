@@ -13,6 +13,7 @@ import edu.eci.cvds.samples.entities.TipoItem;
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
@@ -118,7 +119,8 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    @Override
    public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
        try{
-           clienteDAO.saveItemAgregadoACliente(date,docu,item,numdias);
+           LocalDate fechafin = date.toLocalDate().plusDays(numdias);
+		   clienteDAO.saveItemAgregadoACliente(docu, item, date, Date.valueOf(fechafin));
        }
        catch (PersistenceException ex) {
            throw new ExcepcionServiciosAlquiler("Error al registrar el alquiler del cliente", ex);
